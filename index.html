@@ -6,89 +6,232 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Register Your Interest | Pinnacle Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root { --navy:#0B2545; --gold:#B08D57; --slate:#5C6B7A; --ivory:#F5F3EF; --stone:#E2DED6; }
+  :root {
+    --navy:#0B2545; --navy-2:#13315C; --gold:#B08D57; --gold-dk:#94743F; --gold-lt:#E9DCC4;
+    --slate:#5C6B7A; --ivory:#F5F3EF; --stone:#E2DED6; --err:#B3261E;
+    --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+    --sans:'Inter',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+  }
   * { box-sizing:border-box; }
-  body { margin:0; font-family:Georgia,'Times New Roman',serif; background:var(--ivory); color:var(--navy); }
-  header { background:var(--navy); text-align:center; padding:36px 16px 28px; border-bottom:4px solid var(--gold); }
-  header img { max-width:220px; height:auto; }
-  header .wordmark { display:none; color:#fff; font-size:30px; letter-spacing:10px; }
-  header p { color:var(--gold); letter-spacing:4px; text-transform:uppercase; font-size:12px; margin:14px 0 0; }
-  main { max-width:640px; margin:-1px auto 48px; background:#fff; border:1px solid var(--stone); padding:36px 40px; }
-  h1 { font-weight:normal; font-size:26px; margin:0 0 6px; }
-  .lead { color:var(--slate); font-size:15px; margin:0 0 28px; line-height:1.6; }
+  html,body { margin:0; }
+  body { font-family:var(--sans); background:var(--ivory); color:var(--navy); -webkit-font-smoothing:antialiased; }
+  .demo-banner { background:#B26A00; color:#fff; text-align:center; padding:10px 16px; font:600 13px/1.4 var(--sans); }
+
+  .shell { display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); min-height:calc(100vh - 40px); }
+
+  /* Left brand panel */
+  .brand {
+    position:relative; overflow:hidden; color:#fff; padding:56px 56px 40px;
+    display:flex; flex-direction:column; justify-content:space-between; gap:40px;
+    background:
+      radial-gradient(1200px 600px at -10% 110%, rgba(176,141,87,.28), transparent 60%),
+      radial-gradient(800px 500px at 120% -10%, rgba(255,255,255,.07), transparent 60%),
+      linear-gradient(160deg, var(--navy) 0%, var(--navy-2) 100%);
+  }
+  .brand::after { /* subtle architectural lines */
+    content:""; position:absolute; inset:0; pointer-events:none; opacity:.08;
+    background-image:linear-gradient(90deg,#fff 1px,transparent 1px);
+    background-size:72px 100%;
+    mask-image:linear-gradient(180deg,transparent,#000 40%,#000 70%,transparent);
+    -webkit-mask-image:linear-gradient(180deg,transparent,#000 40%,#000 70%,transparent);
+  }
+  .brand > * { position:relative; z-index:1; }
+  .logo img { max-width:190px; height:auto; display:block; }
+  .logo .wordmark { display:none; font-family:var(--serif); font-size:30px; letter-spacing:10px; font-weight:500; }
+  .eyebrow { color:var(--gold); letter-spacing:4px; text-transform:uppercase; font-size:11px; font-weight:600; margin:0 0 18px; }
+  .brand h2 { font-family:var(--serif); font-weight:400; font-size:clamp(34px,3.4vw,50px); line-height:1.08; margin:0 0 20px; }
+  .brand h2 em { color:var(--gold-lt); font-style:italic; }
+  .brand .intro { color:rgba(255,255,255,.74); font-size:15px; line-height:1.7; max-width:420px; margin:0; }
+  .perks { list-style:none; padding:0; margin:32px 0 0; display:grid; gap:16px; }
+  .perks li { display:flex; gap:14px; align-items:flex-start; font-size:14px; color:rgba(255,255,255,.86); line-height:1.5; }
+  .perks .dot { flex:0 0 28px; height:28px; border:1px solid rgba(176,141,87,.6); border-radius:50%; display:grid; place-items:center; color:var(--gold); font-size:13px; }
+  .brand-foot { font-size:12px; color:rgba(255,255,255,.55); line-height:1.7; border-top:1px solid rgba(255,255,255,.12); padding-top:20px; }
+  .brand-foot b { color:#fff; letter-spacing:2px; font-weight:600; }
+
+  /* Right form panel */
+  .form-wrap { display:flex; align-items:center; justify-content:center; padding:56px 40px; }
+  .card { width:100%; max-width:620px; background:#fff; border:1px solid var(--stone); border-radius:4px; padding:44px 48px; box-shadow:0 30px 60px -30px rgba(11,37,69,.25); }
+  .card h1 { font-family:var(--serif); font-weight:500; font-size:36px; line-height:1.1; margin:0 0 10px; }
+  .card .lead { color:var(--slate); font-size:15px; margin:0 0 32px; line-height:1.65; }
+  .section-label { font-size:11px; font-weight:600; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold-dk); margin:0 0 16px; display:flex; align-items:center; gap:12px; }
+  .section-label::after { content:""; flex:1; height:1px; background:var(--stone); }
+  .section-label + .grid { margin-bottom:30px; }
   .grid { display:grid; grid-template-columns:1fr 1fr; gap:18px 20px; }
   .full { grid-column:1 / -1; }
-  label { display:block; font-family:Arial,Helvetica,sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--slate); margin-bottom:6px; }
-  input, select { width:100%; padding:12px 14px; border:1px solid var(--stone); background:#FCFBF9; font-size:15px; font-family:Arial,Helvetica,sans-serif; color:var(--navy); }
-  input:focus, select:focus { outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(176,141,87,.18); }
-  button { margin-top:28px; width:100%; padding:16px; background:var(--gold); color:#fff; border:0; font-size:13px; letter-spacing:3px; text-transform:uppercase; cursor:pointer; }
-  button:hover { background:#9C7B48; }
-  .consent { font-family:Arial,Helvetica,sans-serif; font-size:12px; color:var(--slate); margin-top:16px; line-height:1.5; }
-  footer { text-align:center; font-family:Arial,Helvetica,sans-serif; font-size:12px; color:var(--slate); padding:0 16px 40px; line-height:1.7; }
-  footer b { color:var(--navy); letter-spacing:2px; }
-  @media (max-width:560px) { main { padding:28px 20px; } .grid { grid-template-columns:1fr; } }
+  .field { min-width:0; }
+  label { display:block; font-size:12px; font-weight:500; color:var(--navy); margin-bottom:7px; }
+  label .req { color:var(--gold-dk); margin-left:2px; }
+  label .opt { color:var(--slate); font-weight:400; font-size:11px; margin-left:4px; }
+  input, select {
+    width:100%; height:48px; padding:0 14px; border:1px solid var(--stone); border-radius:3px;
+    background:#FCFBF9; font:15px var(--sans); color:var(--navy);
+    transition:border-color .15s, box-shadow .15s, background .15s;
+  }
+  input::placeholder { color:#A3ABB4; }
+  select { appearance:none; -webkit-appearance:none; padding-right:40px; cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23B08D57' stroke-width='1.6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 15px center; }
+  input:hover, select:hover { border-color:#CFC8BB; }
+  input:focus, select:focus { outline:none; border-color:var(--gold); background:#fff; box-shadow:0 0 0 3px rgba(176,141,87,.18); }
+  .field.invalid input, .field.invalid select { border-color:var(--err); }
+  .err-msg { display:none; color:var(--err); font-size:12px; margin-top:6px; }
+  .field.invalid .err-msg { display:block; }
+  .money { position:relative; }
+  .money span { position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--slate); font-size:14px; pointer-events:none; }
+  .money input { padding-left:42px; }
+
+  button[type=submit] {
+    margin-top:8px; width:100%; height:56px; background:var(--navy); color:#fff; border:0; border-radius:3px;
+    font:600 13px var(--sans); letter-spacing:3px; text-transform:uppercase; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; gap:12px;
+    transition:background .2s, transform .1s;
+  }
+  button[type=submit]:hover { background:var(--navy-2); }
+  button[type=submit]:active { transform:translateY(1px); }
+  button[type=submit] .arrow { color:var(--gold); transition:transform .2s; }
+  button[type=submit]:hover .arrow { transform:translateX(4px); }
+  button[type=submit]:disabled { opacity:.75; cursor:progress; }
+  .spinner { display:none; width:16px; height:16px; border:2px solid rgba(255,255,255,.35); border-top-color:#fff; border-radius:50%; animation:spin .8s linear infinite; }
+  button.loading .spinner { display:block; } button.loading .arrow { display:none; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .consent { font-size:12px; color:var(--slate); margin:16px 0 0; line-height:1.6; text-align:center; }
+  .trust { display:flex; justify-content:center; gap:22px; flex-wrap:wrap; margin-top:22px; padding-top:20px; border-top:1px solid var(--stone); font-size:12px; color:var(--slate); }
+  .trust span::before { content:"✓"; color:var(--gold); margin-right:6px; font-weight:600; }
+
+  @media (max-width:960px) {
+    .shell { grid-template-columns:1fr; min-height:0; }
+    .brand { padding:40px 28px 32px; gap:28px; }
+    .perks { display:none; }
+    .brand-foot { display:none; }
+    .form-wrap { padding:0 16px 48px; margin-top:-16px; }
+  }
+  @media (max-width:560px) {
+    .card { padding:30px 22px; }
+    .card h1 { font-size:30px; }
+    .grid { grid-template-columns:1fr; }
+    .trust { gap:12px; }
+  }
+  @media (prefers-reduced-motion:reduce) { * { transition:none !important; animation:none !important; } }
 </style>
 </head>
 <body>
-<div style="background:#B26A00;color:#fff;text-align:center;padding:10px 16px;font:600 14px/1.4 system-ui,sans-serif">Concept demo of a Salesforce web enquiry form, prepared for Pinnacle Group. Not an official Pinnacle Group page. Please do not enter real personal details.</div>
-<header>
-  <img src="https://pinnaclegroup.com.my/wp-content/uploads/2026/03/Pinnacle-Logo-scaled.webp" alt="PINNACLE"
-       onerror="this.style.display='none';document.querySelector('.wordmark').style.display='block';">
-  <div class="wordmark">PINNACLE</div>
-  <p>Curating Legacy Habitats</p>
-</header>
-<main>
-  <h1>Register your interest</h1>
-  <p class="lead">Tell us which Pinnacle home you are considering. A dedicated sales executive will contact you to arrange a private viewing at our show gallery.</p>
-  <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00DgK00000hIk8T" method="POST" onsubmit="document.getElementById('company').value = (document.getElementById('first_name').value + ' ' + document.getElementById('last_name').value).trim();">
-    <input type="hidden" name="oid" value="00DgK00000hIk8T">
-    <input type="hidden" name="retURL" value="https://akhil8790.github.io/pinnacle-enquiry-demo/thanks.html">
-    <input type="hidden" id="company" name="company" value="Individual Buyer">
-    <div class="grid">
-      <div><label for="first_name">First name</label><input id="first_name" name="first_name" maxlength="40" required></div>
-      <div><label for="last_name">Last name</label><input id="last_name" name="last_name" maxlength="80" required></div>
-      <div><label for="email">Email</label><input id="email" name="email" type="email" maxlength="80" required></div>
-      <div><label for="phone">Mobile</label><input id="phone" name="phone" type="tel" maxlength="40" placeholder="+60 12-345 6789" required></div>
-      <div class="full"><label for="00NgK00005KCvZN">Project of interest</label>
-        <select id="00NgK00005KCvZN" name="00NgK00005KCvZN" required>
-            <option value="">Select a project</option>
-            <option value="Pinnacle Ridge Valley">Pinnacle Ridge Valley</option>
-            <option value="Pinnacle Dengkil">Pinnacle Dengkil</option>
-            <option value="Titanium Gardens Residensi">Titanium Gardens Residensi</option>
-            <option value="Pinnacle Bukit Gambier">Pinnacle Bukit Gambier</option>
-            <option value="Pinnacle EduCity">Pinnacle EduCity</option>
-        </select></div>
-      <div><label for="00NgK00005KCvZM">Preferred unit type</label>
-        <select id="00NgK00005KCvZM" name="00NgK00005KCvZM">
-            <option value="">No preference</option>
-            <option value="Intermediate Lot">Intermediate Lot</option>
-            <option value="Corner Lot">Corner Lot</option>
-            <option value="End Lot">End Lot</option>
-            <option value="Semi-D">Semi-D</option>
-            <option value="Sky Residence">Sky Residence</option>
-            <option value="Penthouse">Penthouse</option>
-            <option value="Garden Villa">Garden Villa</option>
-        </select></div>
-      <div><label for="00NgK00005KCvZJ">Budget (RM)</label><input id="00NgK00005KCvZJ" name="00NgK00005KCvZJ" type="number" min="0" step="10000" placeholder="e.g. 1200000"></div>
-      <div class="full"><label for="lead_source">How did you hear about us?</label>
-        <select id="lead_source" name="lead_source">
-            <option value="Website">Website</option>
-            <option value="Facebook">Facebook</option>
-            <option value="Instagram">Instagram</option>
-            <option value="Walk-in">Walk-in</option>
-            <option value="Property Agent">Property Agent</option>
-            <option value="Roadshow/Launch Event">Roadshow/Launch Event</option>
-            <option value="Referral">Referral</option>
-        </select></div>
+<div class="demo-banner">Concept demo of a Salesforce web enquiry form, prepared for Pinnacle Group. Not an official Pinnacle Group page. Please do not enter real personal details.</div>
+
+<div class="shell">
+  <aside class="brand">
+    <div class="logo">
+      <img src="https://pinnaclegroup.com.my/wp-content/uploads/2026/03/Pinnacle-Logo-scaled.webp" alt="PINNACLE"
+           onerror="this.style.display='none';document.querySelector('.wordmark').style.display='block';">
+      <div class="wordmark">PINNACLE</div>
     </div>
-    <button type="submit">Register interest</button>
-    <p class="consent">By submitting, you agree that Pinnacle Group may contact you about this enquiry in accordance with the Personal Data Protection Act 2010.</p>
-  </form>
-</main>
-<footer>
-  <b>PINNACLE GROUP</b> &middot; Crafted with Trust at the Core<br>
-  Level 26A, Tower B, Pinnacle PJ, Jalan Utara C, 46200 Petaling Jaya, Selangor &middot; +603 7932 2269
-</footer>
+    <div>
+      <p class="eyebrow">Private viewing by appointment</p>
+      <h2>A home crafted to be <em>passed on.</em></h2>
+      <p class="intro">Register your interest in a Pinnacle development and a dedicated sales executive will arrange a private viewing at our show gallery.</p>
+      <ul class="perks">
+        <li><span class="dot">1</span><span>A sales executive calls you back, typically within the hour</span></li>
+        <li><span class="dot">2</span><span>Private show-gallery tour at a time that suits you</span></li>
+        <li><span class="dot">3</span><span>Priority access to launch pricing and unit selection</span></li>
+      </ul>
+    </div>
+    <div class="brand-foot">
+      <b>PINNACLE GROUP</b> &middot; Crafted with Trust at the Core<br>
+      Level 26A, Tower B, Pinnacle PJ, Jalan Utara C, 46200 Petaling Jaya, Selangor &middot; +603 7932 2269
+    </div>
+  </aside>
+
+  <main class="form-wrap">
+    <div class="card">
+      <h1>Register your interest</h1>
+      <p class="lead">Tell us which Pinnacle home you are considering. It takes less than a minute.</p>
+
+      <form id="leadForm" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00DgK00000hIk8T" method="POST" novalidate>
+        <input type="hidden" name="oid" value="00DgK00000hIk8T">
+        <input type="hidden" name="retURL" value="https://akhil8790.github.io/pinnacle-enquiry-demo/thanks.html">
+        <input type="hidden" id="company" name="company" value="Individual Buyer">
+
+        <p class="section-label">Your details</p>
+        <div class="grid">
+          <div class="field"><label for="first_name">First name<span class="req">*</span></label><input id="first_name" name="first_name" maxlength="40" autocomplete="given-name" required><div class="err-msg">Please enter your first name.</div></div>
+          <div class="field"><label for="last_name">Last name<span class="req">*</span></label><input id="last_name" name="last_name" maxlength="80" autocomplete="family-name" required><div class="err-msg">Please enter your last name.</div></div>
+          <div class="field"><label for="email">Email<span class="req">*</span></label><input id="email" name="email" type="email" maxlength="80" autocomplete="email" placeholder="you@example.com" required><div class="err-msg">Please enter a valid email address.</div></div>
+          <div class="field"><label for="phone">Mobile<span class="req">*</span></label><input id="phone" name="phone" type="tel" maxlength="40" autocomplete="tel" placeholder="+60 12-345 6789" required><div class="err-msg">Please enter your mobile number.</div></div>
+        </div>
+
+        <p class="section-label">Your new home</p>
+        <div class="grid">
+          <div class="field full"><label for="00NgK00005KCvZN">Project of interest<span class="req">*</span></label>
+            <select id="00NgK00005KCvZN" name="00NgK00005KCvZN" required>
+              <option value="">Select a project</option>
+              <option value="Pinnacle Ridge Valley">Pinnacle Ridge Valley</option>
+              <option value="Pinnacle Dengkil">Pinnacle Dengkil</option>
+              <option value="Titanium Gardens Residensi">Titanium Gardens Residensi</option>
+              <option value="Pinnacle Bukit Gambier">Pinnacle Bukit Gambier</option>
+              <option value="Pinnacle EduCity">Pinnacle EduCity</option>
+            </select><div class="err-msg">Please choose a project.</div></div>
+          <div class="field"><label for="00NgK00005KCvZM">Preferred unit type<span class="opt">(optional)</span></label>
+            <select id="00NgK00005KCvZM" name="00NgK00005KCvZM">
+              <option value="">No preference</option>
+              <option value="Intermediate Lot">Intermediate Lot</option>
+              <option value="Corner Lot">Corner Lot</option>
+              <option value="End Lot">End Lot</option>
+              <option value="Semi-D">Semi-D</option>
+              <option value="Sky Residence">Sky Residence</option>
+              <option value="Penthouse">Penthouse</option>
+              <option value="Garden Villa">Garden Villa</option>
+            </select></div>
+          <div class="field"><label for="00NgK00005KCvZJ">Budget<span class="opt">(optional)</span></label>
+            <div class="money"><span>RM</span><input id="00NgK00005KCvZJ" name="00NgK00005KCvZJ" type="number" min="0" step="10000" inputmode="numeric" placeholder="1,200,000"></div></div>
+          <div class="field full"><label for="lead_source">How did you hear about us?</label>
+            <select id="lead_source" name="lead_source">
+              <option value="Website">Website</option>
+              <option value="Facebook">Facebook</option>
+              <option value="Instagram">Instagram</option>
+              <option value="Walk-in">Walk-in</option>
+              <option value="Property Agent">Property Agent</option>
+              <option value="Roadshow/Launch Event">Roadshow/Launch Event</option>
+              <option value="Referral">Referral</option>
+            </select></div>
+        </div>
+
+        <button type="submit" id="submitBtn"><span class="spinner" aria-hidden="true"></span><span class="label">Register interest</span><span class="arrow" aria-hidden="true">&rarr;</span></button>
+        <p class="consent">By submitting, you agree that Pinnacle Group may contact you about this enquiry in accordance with the Personal Data Protection Act 2010.</p>
+        <div class="trust"><span>No obligation</span><span>Response within 1 hour</span><span>PDPA compliant</span></div>
+      </form>
+    </div>
+  </main>
+</div>
+
+<script>
+(function () {
+  var form = document.getElementById('leadForm');
+  var btn = document.getElementById('submitBtn');
+  function check(el) {
+    var f = el.closest('.field'); if (!f) return true;
+    var ok = el.checkValidity() && (!el.required || el.value.trim() !== '');
+    f.classList.toggle('invalid', !ok); return ok;
+  }
+  form.querySelectorAll('[required]').forEach(function (el) {
+    el.addEventListener('blur', function () { check(el); });
+    el.addEventListener('input', function () { if (el.closest('.field').classList.contains('invalid')) check(el); });
+    el.addEventListener('change', function () { check(el); });
+  });
+  form.addEventListener('submit', function (e) {
+    var first = null;
+    form.querySelectorAll('[required]').forEach(function (el) { if (!check(el) && !first) first = el; });
+    if (first) { e.preventDefault(); first.focus(); return; }
+    document.getElementById('company').value =
+      (document.getElementById('first_name').value + ' ' + document.getElementById('last_name').value).trim();
+    btn.disabled = true; btn.classList.add('loading');
+    btn.querySelector('.label').textContent = 'Submitting';
+  });
+  // Re-enable the button if the user navigates back to this page
+  window.addEventListener('pageshow', function () { btn.disabled = false; btn.classList.remove('loading'); btn.querySelector('.label').textContent = 'Register interest'; });
+})();
+</script>
 </body>
 </html>
